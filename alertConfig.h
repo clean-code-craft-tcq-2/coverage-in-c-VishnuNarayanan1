@@ -31,7 +31,7 @@ typedef struct {
   double higherLimitTemp;
 } BatteryParam_st;
 
-typedef {
+typedef struct {
   BreachType breachType;
   MailNotification mailNotification;
 } BreachMailNotification_st;
