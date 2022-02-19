@@ -4,6 +4,7 @@
 #include "alertConfig.h"
 #include "typewise-alert.h"
 
+// Note : For the test environment stub for all the print interfaces used
 #ifdef TEST_ENVIRONMENT
 int Test_PrintToControllerStubCount;
 int Test_PrintToEmailStubCount;
@@ -15,11 +16,14 @@ void PrintToEmailStub (const char* Recepient, char Message[])
 {
       Test_PrintToEmailStubCount++;
 }
-
-FnPtrPrintToController FuncPointerPrintToController = &PrintToControllerStub ;
-FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmailStub ;
+FnPtrPrintToController FuncPointerPrintToController = &PrintToControllerStub;
+FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmailStub;
 #endif 
 
 TEST_CASE("infers the breach according to limits") {
-  REQUIRE(InferBreach(12, 20, 30) == TOO_LOW);
+  BatteryParam_st BatteryLimits
+  BatteryLimits.lowerLimitTemp = 20
+  BatteryLimits.higherLimitTemp = 50
+  double value = 15
+  REQUIRE(InferBreach(value, BatteryLimits) == TOO_LOW);
 }
