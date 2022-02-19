@@ -1,7 +1,7 @@
 #include "alertConfig.h"
 #include <stdio.h>
 
-struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
+BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
 {
   {
   .coolingType =  PASSIVE_COOLING,
@@ -20,7 +20,7 @@ struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
   }
 };
 
-struct BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES]=
+BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES]=
 {
   {
     .breachType    = NORMAL,
