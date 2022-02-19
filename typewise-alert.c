@@ -58,7 +58,7 @@ void PrintToController (const unsigned short header, BreachType breachType)
 
 void PrintToEmail (const char* recepient, char[] message)
 {
-      printf(""To: %s\n%s", recepient,message);
+      printf("To: %s\n%s", recepient,message);
 }
 
 void sendAlertToController(BreachType breachType) 
