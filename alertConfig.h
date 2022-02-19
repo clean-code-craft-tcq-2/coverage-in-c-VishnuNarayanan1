@@ -1,4 +1,6 @@
 #include <stddef.h>
+
+#define TEST_ENVIRONMENT
 #define INVALID_TEMPERATURE 0xff
 #define SUCCESS true
 #define FAILURE false
