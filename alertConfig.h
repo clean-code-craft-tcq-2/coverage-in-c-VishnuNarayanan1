@@ -28,19 +28,6 @@ typedef struct {
   double higherLimitTemp;
 } BatteryParam_st;
 
-typedef ValueLimits (*FnPtrReadBatteryParam)(void);
-
-struct InputValues_st
-{
-  FnPtrReadBatteryParam readInputValues;
-};
-
-typedef struct {
-  AlertTarget alertTarget;
-  
-} BreachMailNotification_st;
-  
 
 extern BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
-extern BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES];
 extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
