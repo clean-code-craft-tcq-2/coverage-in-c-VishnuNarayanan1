@@ -12,6 +12,25 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
+BatteryParam_st classifyTemp(CoolingType coolingType)
+{
+  int i = 0;
+  BatteryParam_st batteryParameters; 
+  batteryParameters.coolingType = INVALID_COOLING_TYPE;
+  batteryParameters.lowerLimitTemp = INVALID_TEMPERATURE;
+  batteryParameters.higherLimitTemp = INVALID_TEMPERATURE;
+  for(i = 0; i < MAX_COOLING_TYPES; i++)
+  {
+    if(coolingType == BatteryParamValues[i])
+    {
+      batteryParameters.coolingType = BatteryParamValues[i].coolingType;
+      batteryParameters.lowerLimitTemp = BatteryParamValues[i].lowerLimitTemp;
+      batteryParameters.higherLimitTemp = BatteryParamValues[i].higherLimitTemp;
+    }
+  }
+  return batteryParameters;
+}
+
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) 
 {
   int lowerLimit = 0;
