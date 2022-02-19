@@ -1,5 +1,4 @@
 #include <stddef.h>
-#define MAX_COOLING_TYPES   3
 #define INVALID_TEMPERATURE 0xff
 #define SUCCESS true
 #define FAILURE false
@@ -8,6 +7,7 @@ typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
   MED_ACTIVE_COOLING,
+  MAX_COOLING_TYPES,
   INVALID_COOLING_TYPE = 0xff
 } CoolingType;
 
