@@ -183,3 +183,17 @@ TEST_CASE("AlertBreach -Negative scenario- Alert message through invalid target 
   REQUIRE(Test_PrintToControllerStubCount  == 3); 
   REQUIRE(Test_PrintToEmailStubCount  == 2);  
 }
+
+
+TEST_CASE("SendAlertToController - With various possible breach types  ") {
+  SendAlertToController (NORMAL);
+  REQUIRE(Test_PrintToControllerStubCount  == 4); 
+  REQUIRE(Test_PrintToEmailStubCount  == 2);  
+  SendAlertToController (TOO_LOW);
+  REQUIRE(Test_PrintToControllerStubCount  == 5); 
+  REQUIRE(Test_PrintToEmailStubCount  == 2);
+  SendAlertToController (TOO_HIGH);
+  REQUIRE(Test_PrintToControllerStubCount  == 6); 
+  REQUIRE(Test_PrintToEmailStubCount  == 2);
+}
+
