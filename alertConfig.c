@@ -1,7 +1,7 @@
 #include "alertConfig.h"
 #include <stdio.h>
 
-struct BatteryParam BatteryParamValues[MAX_COOLING_TYPES] =
+struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
 {
   {
   .coolingType =  PASSIVE_COOLING,
