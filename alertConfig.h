@@ -6,6 +6,7 @@
 #define FAILURE false
 
 typedef enum {
+  COOLING_NEGATIVE = -1,
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
   MED_ACTIVE_COOLING,
