@@ -248,15 +248,15 @@ TEST_CASE("ValidateBattery -Positive Scenario- TO_CONTROLLER , MED_ACTIVE_COOLIN
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,25);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 10); 
+  REQUIRE(Test_PrintToControllerStubCount  == 13); 
   REQUIRE(Test_PrintToEmailStubCount  == 4); 
   ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,-10);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 11); 
+  REQUIRE(Test_PrintToControllerStubCount  == 14); 
   REQUIRE(Test_PrintToEmailStubCount  == 4); 
   ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,45);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 4); 
 }
 
@@ -266,15 +266,15 @@ TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , PASSIVE_COOLING with v
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,25);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 4); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,-10);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 5); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,45);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 6); 
 }
 
@@ -284,15 +284,15 @@ TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , HI_ACTIVE_COOLING with
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,25);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 6); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,-10);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 7); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,50);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 8); 
 }
 
@@ -302,15 +302,15 @@ TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , MED_ACTIVE_COOLING wit
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,25);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 8); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,-10);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 9); 
   ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,45);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
-  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 10); 
 }
 
