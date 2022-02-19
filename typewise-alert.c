@@ -37,9 +37,14 @@ bool validateRange(size_t var1, size_t var2)
 }
 
 
-void alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
+bool alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
-  AlertTargetInfo[alertTarget].alertTargetFunction(processedBreachType);
+  if(validateRange(alertTarget,MAX_ALERT_TARGET_POSSIBILITIES)
+  {
+    AlertTargetInfo[alertTarget].alertTargetFunction(processedBreachType);
+    return SUCCESS;
+  }
+   return FAILURE;
 }
 
 void PrintToController (const unsigned short header, BreachType breachType)
@@ -68,14 +73,16 @@ void sendAlertToEmail(BreachType breachType)
 }
 
 
-void test(AlertTarget alertTarget, CoolingType coolingType, double temperatureInC)
+bool test(AlertTarget alertTarget, CoolingType coolingType, double temperatureInC)
 {
   BatteryParam_st batteryTempLimits;
   BreachType processedBreachType;
+  bool status;
   batteryTempLimits = classifyTemp(coolingType);
   if(batteryTempLimits.status == SUCCESS)
   {
     processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
-    alertBreach(alertTarget , processedBreachType);
+    status = alertBreach(alertTarget , processedBreachType);
   }
+  return status;
 }
