@@ -7,17 +7,20 @@ BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
   {
   .coolingType =  PASSIVE_COOLING,
   .lowerLimitTemp = 0,
-  .higherLimitTemp = 35
+  .higherLimitTemp = 35,
+  .status = FAILURE
   },
   {
   .coolingType =  HI_ACTIVE_COOLING,
   .lowerLimitTemp = 0,
-  .higherLimitTemp = 45
+  .higherLimitTemp = 45,
+  .status = FAILURE
   },
   {
   .coolingType = MED_ACTIVE_COOLING,
   .lowerLimitTemp = 0,
-  .higherLimitTemp = 40
+  .higherLimitTemp = 40,
+  .status = FAILURE
   }
 };
 AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES] =
