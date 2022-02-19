@@ -45,3 +45,29 @@ TEST_CASE("Temperature value passed is in the normal range") {
   double value = 30;
   REQUIRE(InferBreach(value, BatteryLimits) == NORMAL);
 }
+
+TEST_CASE("Temperature value passed is in the lower boundary") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits.lowerLimitTemp = 20;
+  BatteryLimits.higherLimitTemp = 50;
+  double value = 20;
+  REQUIRE(InferBreach(value, BatteryLimits) == NORMAL);
+}
+
+TEST_CASE("Temperature value passed is in the higher boundary") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits.lowerLimitTemp = 20;
+  BatteryLimits.higherLimitTemp = 50;
+  double value = 50;
+  REQUIRE(InferBreach(value, BatteryLimits) == NORMAL);
+}
+
+
+TEST_CASE("PASSIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits = ClassifyTemp(PASSIVE_COOLING);
+  REQUIRE(BatteryLimits.status  == SUCCESS);
+  REQUIRE(BatteryLimits.coolingType  == PASSIVE_COOLING);
+  REQUIRE(BatteryLimits.lowerLimitTemp  == 0);
+  REQUIRE(BatteryLimits.higherLimitTemp == 35);
+}
