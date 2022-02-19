@@ -4,10 +4,6 @@
 #define SUCCESS true
 #define FAILURE false
 
-typedef void (*FnPtrAlertTarget)(BreachType);
-typedef void (*FnPtrPrintToController)(const unsigned short header, BreachType breachType);
-typedef void (*FnPtrPrintToEmail)(const char* recepient, char message[]);
-
 typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
@@ -39,6 +35,10 @@ typedef struct {
   double higherLimitTemp;
   bool status;
 } BatteryParam_st;
+
+typedef void (*FnPtrAlertTarget)(BreachType);
+typedef void (*FnPtrPrintToController)(const unsigned short , BreachType);
+typedef void (*FnPtrPrintToEmail)(const char* , char[]);
 
 typedef struct 
 {
