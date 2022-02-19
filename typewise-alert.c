@@ -5,17 +5,10 @@
 
 BreachType inferBreach(double value, BatteryParam_st batteryLimits) 
 {
-  if(value < batteryLimits.lowerLimitTemp) 
-  {
-    return TOO_LOW;
-  }
-  if(value > batteryLimits.higherLimitTemp) 
-  {
-    return TOO_HIGH;
-  }
+  if(value < batteryLimits.lowerLimitTemp) {return TOO_LOW;}
+  if(value > batteryLimits.higherLimitTemp) { return TOO_HIGH;}
   return NORMAL;
 }
-
 
 BatteryParam_st classifyTemp(CoolingType coolingType)
 {
@@ -60,7 +53,7 @@ void PrintToEmail (const char* recepient, char message[])
 void sendAlertToController(BreachType breachType) 
 {
   const unsigned short header = 0xfeed;
-  PrintToController(header,breachType);
+  FuncPointerPrintToController(header,breachType);
 }
 
 void sendAlertToEmail(BreachType breachType) 
@@ -68,7 +61,7 @@ void sendAlertToEmail(BreachType breachType)
   const char* recepient = "a.b@c.com";
   if(MailNotificationInfo[breachType].mailNotification == REQUIRED)
   {
-    PrintToEmail(recepient,AlertMessageOverEmail[breachType]);
+    FuncPointerPrintToEmail(recepient,AlertMessageOverEmail[breachType]);
   }
 }
 
