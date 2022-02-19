@@ -212,3 +212,11 @@ TEST_CASE("SendAlertToEmail - With Mail Notification Not Required - In case of b
   REQUIRE(Test_PrintToEmailStubCount  == 4);  
 }
 
+TEST_CASE("ValidateBattery -Positive Scenario- ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,PASSIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 7); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4);  
+}
+
