@@ -49,7 +49,7 @@ typedef struct
   MailNotification mailNotification;
 }MailNotification_st;
 
-extern MailNotification_st MailNotification[MAX_BREACH_TYPES];
+extern MailNotification_st MailNotificationInfo[MAX_BREACH_TYPES];
 extern AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES];
 extern BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
 extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
