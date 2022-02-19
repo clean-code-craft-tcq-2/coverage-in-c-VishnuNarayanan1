@@ -49,6 +49,7 @@ bool AlertBreach(AlertTarget AlertTargetInfo, BreachType processedBreachType)
 {
   if(validateRange(AlertTargetInfo,MAX_ALERT_TARGET_POSSIBILITIES))
   {
+     // Refer to alertConfig files for the configured function pointer.
     AlertTargetInfo[AlertTargetInfo].alertTargetFunction(processedBreachType);
     return SUCCESS;
   }
@@ -61,6 +62,7 @@ bool AlertBreach(AlertTarget AlertTargetInfo, BreachType processedBreachType)
 void SendAlertToController(BreachType BreachTypeInfo) 
 {
   const unsigned short header = 0xfeed;
+  // Refer to alertConfig files for the configured function pointer.
   FuncPointerPrintToController(header,BreachTypeInfo);
 }
 
@@ -72,11 +74,13 @@ void SendAlertToEmail(BreachType BreachTypeInfo)
   const char* recepient = "a.b@c.com";
   if(MailNotificationInfo[BreachTypeInfo].mailNotification == REQUIRED)
   {
+    // Refer to alertConfig files for the configured function pointer.
     FuncPointerPrintToEmail(recepient,AlertMessageOverEmail[BreachTypeInfo]);
   }
 }
 
-
+// Primary function which takes in user parameters to validate the battery.
+// Status is checked if the parameters passed are within permissible range.
 bool ValidateBattery(AlertTarget AlertTargetInfo, CoolingType CoolingTypeInfo, double TemperatureInC)
 {
   BatteryParam_st batteryTempLimits;
