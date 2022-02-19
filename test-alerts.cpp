@@ -21,5 +21,5 @@ FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmailStub ;
 #endif 
 
 TEST_CASE("infers the breach according to limits") {
-  REQUIRE(inferBreach(12, 20, 30) == TOO_LOW);
+  REQUIRE(InferBreach(12, 20, 30) == TOO_LOW);
 }
