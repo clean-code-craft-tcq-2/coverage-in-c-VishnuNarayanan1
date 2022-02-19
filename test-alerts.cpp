@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
 #include "test/catch.hpp"
+#include <stdbool.h>
 #include "alertConfig.h"
 #include "typewise-alert.h"
 
@@ -105,17 +106,17 @@ TEST_CASE("ValidateRange -Positive scenario-  On passing 2 input values with (va
 TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 >= 0 && var1 > var2) ") {
   bool ValidateRangeStatus;
   ValidateRangeStatus = ValidateRange (15,10);
-  REQUIRE(ValidateRangeStatus  == fail);
+  REQUIRE(ValidateRangeStatus  == false);
 }
 
 TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 < 0 && var1 < var2) ") {
   bool ValidateRangeStatus;
   ValidateRangeStatus = ValidateRange (-1,10);
-  REQUIRE(ValidateRangeStatus  == fail);
+  REQUIRE(ValidateRangeStatus  == false);
 }
 
 TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 < 0 && var1 > var2) ") {
   bool ValidateRangeStatus;
   ValidateRangeStatus = ValidateRange (-1,-5);
-  REQUIRE(ValidateRangeStatus  == fail);
+  REQUIRE(ValidateRangeStatus  == false);
 }
