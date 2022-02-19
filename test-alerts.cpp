@@ -197,3 +197,18 @@ TEST_CASE("SendAlertToController - With various possible breach types  ") {
   REQUIRE(Test_PrintToEmailStubCount  == 2);
 }
 
+TEST_CASE("SendAlertToEmail - With Mail Notification Required - In case of breach level TOO_LOW and TOO_HIGH") {
+  SendAlertToEmail (TOO_LOW);
+  REQUIRE(Test_PrintToControllerStubCount  == 6); 
+  REQUIRE(Test_PrintToEmailStubCount  == 3);  
+  SendAlertToEmail (TOO_HIGH);
+  REQUIRE(Test_PrintToControllerStubCount  == 6); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4);
+}
+
+TEST_CASE("SendAlertToEmail - With Mail Notification Not Required - In case of breach level NORMAL") {
+  SendAlertToEmail (NORMAL);
+  REQUIRE(Test_PrintToControllerStubCount  == 6); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4);  
+}
+
