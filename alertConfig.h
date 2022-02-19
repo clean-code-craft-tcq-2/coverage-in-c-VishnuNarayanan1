@@ -24,6 +24,11 @@ typedef enum {
   MAX_ALERT_TARGET_POSSIBILITIES
 } AlertTarget;
 
+typedef enum{
+  REQUIRED,
+  NOT_REQUIRED
+}MailNotification;
+
 typedef struct {
   CoolingType coolingType;
   double lowerLimitTemp;
@@ -38,6 +43,13 @@ typedef struct
   FnPtrAlertTarget alertTargetFunction;
 }AlertTarget_st;
 
+typedef struct 
+{
+  BreachType breachType;
+  MailNotification mailNotification;
+}MailNotification_st;
+
+extern MailNotification_st MailNotification[MAX_BREACH_TYPES];
 extern AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES];
 extern BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
 extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
