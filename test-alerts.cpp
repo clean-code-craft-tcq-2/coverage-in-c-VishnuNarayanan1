@@ -71,3 +71,27 @@ TEST_CASE("PASSIVE_COOLING Cooling Type based lower and upper temperature limit 
   REQUIRE(BatteryLimits.lowerLimitTemp  == 0);
   REQUIRE(BatteryLimits.higherLimitTemp == 35);
 }
+
+TEST_CASE("HI_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits = ClassifyTemp(HI_ACTIVE_COOLING);
+  REQUIRE(BatteryLimits.status  == SUCCESS);
+  REQUIRE(BatteryLimits.coolingType  == HI_ACTIVE_COOLING);
+  REQUIRE(BatteryLimits.lowerLimitTemp  == 0);
+  REQUIRE(BatteryLimits.higherLimitTemp == 45);
+}
+
+TEST_CASE("MED_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits = ClassifyTemp(MED_ACTIVE_COOLING);
+  REQUIRE(BatteryLimits.status  == SUCCESS);
+  REQUIRE(BatteryLimits.coolingType  == MED_ACTIVE_COOLING);
+  REQUIRE(BatteryLimits.lowerLimitTemp  == 0);
+  REQUIRE(BatteryLimits.higherLimitTemp == 40);
+}
+
+TEST_CASE("INVALID_COOLING_TYPE  Test cooling type which is not under the configured list ") {
+  BatteryParam_st BatteryLimits;
+  BatteryLimits = ClassifyTemp(INVALID_COOLING_TYPE);
+  REQUIRE(BatteryLimits.status  == FAILURE);
+}
