@@ -92,5 +92,6 @@ bool ValidateBattery(AlertTarget AlertTargetInfo, CoolingType CoolingTypeInfo, d
     processedBreachType = InferBreach(TemperatureInC,batteryTempLimits);
     status = AlertBreach(AlertTargetInfo , processedBreachType);
   }
+  printf("\n Status %d\n",status);
   return status;
 }
