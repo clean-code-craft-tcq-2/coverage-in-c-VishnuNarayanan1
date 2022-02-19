@@ -21,9 +21,9 @@ FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmailStub;
 #endif 
 
 TEST_CASE("infers the breach according to limits") {
-  BatteryParam_st BatteryLimits
-  BatteryLimits.lowerLimitTemp = 20
-  BatteryLimits.higherLimitTemp = 50
-  double value = 15
+  BatteryParam_st BatteryLimits;
+  BatteryLimits.lowerLimitTemp = 20;
+  BatteryLimits.higherLimitTemp = 50;
+  double value = 15;
   REQUIRE(InferBreach(value, BatteryLimits) == TOO_LOW);
 }
