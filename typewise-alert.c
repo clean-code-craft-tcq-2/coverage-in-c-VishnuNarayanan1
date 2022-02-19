@@ -3,79 +3,90 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-BreachType inferBreach(double value, BatteryParam_st batteryLimits) 
+//In case of production environment following print functionalities are used.
+#ifdef PRODUCTION_ENVIRONMENT
+void PrintToController (const unsigned short Header, BreachType BreachTypeInfo)
 {
-  if(value < batteryLimits.lowerLimitTemp) {return TOO_LOW;}
-  if(value > batteryLimits.higherLimitTemp) { return TOO_HIGH;}
+      printf("%x : %x\n", Header, BreachTypeInfo);
+}
+
+void PrintToEmail (const char* Recepient, char Message[])
+{
+      printf("To: %s\n%s", Recepient,Message);
+}
+#endif
+
+//Function to validate if the value is within the limits
+BreachType InferBreach(double Value, BatteryParam_st BatteryLimits) 
+{
+  if(Value < BatteryLimits.lowerLimitTemp) {return TOO_LOW;}
+  if(Value > BatteryLimits.higherLimitTemp) { return TOO_HIGH;}
   return NORMAL;
 }
 
-BatteryParam_st classifyTemp(CoolingType coolingType)
+//Function to fill the temperature limits based on cooling type.
+// Here, status is added to check if the passed cooling type is valid, if not the status would be set to false.
+BatteryParam_st ClassifyTemp(CoolingType CoolingTypeInfo)
 {
   BatteryParam_st batteryParameters; 
-  batteryParameters.status = validateRange(coolingType,MAX_COOLING_TYPES);
-  batteryParameters.coolingType = coolingType;
+  batteryParameters.status = validateRange(CoolingTypeInfo,MAX_COOLING_TYPES);
+  batteryParameters.coolingType = CoolingTypeInfo;
   batteryParameters.lowerLimitTemp = BatteryParamValues[coolingType].lowerLimitTemp;
   batteryParameters.higherLimitTemp = BatteryParamValues[coolingType].higherLimitTemp;
   return batteryParameters;
 }
 
-bool validateRange(size_t var1, size_t var2)
+// Utility function to validate if the variable 1 is within the specified range.
+bool ValidateRange(size_t Var1, size_t Var2)
 {
-  if(var1 > 0 && var1 < var2)
-  {
-    return true;
-  } 
+  if((Var1 > 0) && (Var1 < Var2)) { return true;} 
   return false;
 }
 
-
-bool alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
+// This function is to alert the breach to the user.
+// Here the value of the alertTarget is checked to ensure that it is within the possible limits configured in alertConfig files.
+bool AlertBreach(AlertTarget AlertTargetInfo, BreachType processedBreachType) 
 {
-  if(validateRange(alertTarget,MAX_ALERT_TARGET_POSSIBILITIES))
+  if(validateRange(AlertTargetInfo,MAX_ALERT_TARGET_POSSIBILITIES))
   {
-    AlertTargetInfo[alertTarget].alertTargetFunction(processedBreachType);
+    AlertTargetInfo[AlertTargetInfo].alertTargetFunction(processedBreachType);
     return SUCCESS;
   }
    return FAILURE;
 }
 
-void PrintToController (const unsigned short header, BreachType breachType)
-{
-      printf("%x : %x\n", header, breachType);
-}
-
-void PrintToEmail (const char* recepient, char message[])
-{
-      printf("To: %s\n%s", recepient,message);
-}
-
-void sendAlertToController(BreachType breachType) 
+// This function makes out the parameters required to send the alert information to controller.
+// Note : if in case in the future if any other way of conveying the breach information is introduced,
+// without touching any other piece of code, just a function similar to this can be added and configured.
+void SendAlertToController(BreachType BreachTypeInfo) 
 {
   const unsigned short header = 0xfeed;
-  FuncPointerPrintToController(header,breachType);
+  FuncPointerPrintToController(header,BreachTypeInfo);
 }
 
-void sendAlertToEmail(BreachType breachType) 
+// This function makes out the parameters required to send the alert information through Email.
+// Note : if in case in the future if any other way of conveying the breach information is introduced,
+// without touching any other piece of code, just a function similar to this can be added and configured.
+void SendAlertToEmail(BreachType BreachTypeInfo) 
 {
   const char* recepient = "a.b@c.com";
-  if(MailNotificationInfo[breachType].mailNotification == REQUIRED)
+  if(MailNotificationInfo[BreachTypeInfo].mailNotification == REQUIRED)
   {
-    FuncPointerPrintToEmail(recepient,AlertMessageOverEmail[breachType]);
+    FuncPointerPrintToEmail(recepient,AlertMessageOverEmail[BreachTypeInfo]);
   }
 }
 
 
-bool test(AlertTarget alertTarget, CoolingType coolingType, double temperatureInC)
+bool ValidateBattery(AlertTarget AlertTargetInfo, CoolingType CoolingTypeInfo, double TemperatureInC)
 {
   BatteryParam_st batteryTempLimits;
   BreachType processedBreachType;
   bool status;
-  batteryTempLimits = classifyTemp(coolingType);
+  batteryTempLimits = ClassifyTemp(CoolingTypeInfo);
   if(batteryTempLimits.status == SUCCESS)
   {
-    processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
-    status = alertBreach(alertTarget , processedBreachType);
+    processedBreachType = InferBreach(TemperatureInC,batteryTempLimits);
+    status = AlertBreach(AlertTargetInfo , processedBreachType);
   }
   return status;
 }
