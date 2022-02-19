@@ -39,16 +39,7 @@ bool validateRange(size_t var1, size_t var2)
 
 void alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
-  
-  switch(alertTarget) 
-  {
-    case TO_CONTROLLER:
-      sendToController(processedBreachType);
-      break;
-    case TO_EMAIL:
-      sendToEmail(processedBreachType);
-      break;
-  }
+  AlertTargetInfo[alertTarget].alertTargetFunction(processedBreachType);
 }
 
 void PrintToController (const unsigned short header, BreachType breachType)
