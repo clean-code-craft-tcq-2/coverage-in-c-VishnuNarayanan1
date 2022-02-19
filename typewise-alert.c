@@ -1,6 +1,7 @@
 #include "alertConfig.h"
 #include "typewise-alert.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 BreachType inferBreach(double value, BatteryParam_st batteryLimits) 
 {
@@ -20,24 +21,27 @@ BatteryParam_st classifyTemp(CoolingType coolingType)
 {
   int i = 0;
   BatteryParam_st batteryParameters; 
-  batteryParameters.coolingType = INVALID_COOLING_TYPE;
-  batteryParameters.lowerLimitTemp = INVALID_TEMPERATURE;
-  batteryParameters.higherLimitTemp = INVALID_TEMPERATURE;
-  for(i = 0; i < MAX_COOLING_TYPES; i++)
-  {
-    if(coolingType == BatteryParamValues[i])
-    {
-      batteryParameters.coolingType = BatteryParamValues[i].coolingType;
-      batteryParameters.lowerLimitTemp = BatteryParamValues[i].lowerLimitTemp;
-      batteryParameters.higherLimitTemp = BatteryParamValues[i].higherLimitTemp;
-    }
-  }
+  batteryParameters.status = validateRange(coolingType,MAX_COOLING_TYPES);
+  batteryParameters.coolingType = coolingType;
+  batteryParameters.lowerLimitTemp = BatteryParamValues[coolingType].lowerLimitTemp;
+  batteryParameters.higherLimitTemp = BatteryParamValues[coolingType].higherLimitTemp;
   return batteryParameters;
+}
+
+bool validateRange(size_t var1, size_t var2)
+{
+  if(var1 > 0 && var1 < var2)
+  {
+    return true;
+  } 
+  return false;
 }
 
 
 void alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
+  fnptr();
+  
   switch(alertTarget) 
   {
     case TO_CONTROLLER:
@@ -47,6 +51,16 @@ void alertBreach(AlertTarget alertTarget, BreachType processedBreachType)
       sendToEmail(processedBreachType);
       break;
   }
+}
+
+void PrintToController (header, breachType)
+{
+      printf("%x : %x\n", header, breachType);
+}
+
+void PrintToEmail (recepient, message)
+{
+      printf(""To: %s\n%s", recepient,message);
 }
 
 void sendToController(BreachType breachType) 
@@ -59,13 +73,10 @@ void sendToEmail(BreachType breachType)
 {
   const char* recepient = "a.b@c.com";
   int i = 0;
-  for(i = 0; i<MAX_BREACH_TYPES; i++)
+  if(BreachMailNotification[breachType].mailNotification == Required)
   {
-    if(BreachMailNotification[breachType].mailNotification == Required)
-    {
-        printf("To: %s\n", recepient);
-        printf("Hi, the temperature is too low\n");
-    }
+      printf("To: %s\n", recepient);
+      printf("Hi, the temperature is too low\n");
   }
 }
 
@@ -75,6 +86,9 @@ void test(AlertTarget alertTarget, CoolingType coolingType, double temperatureIn
   BatteryParam_st batteryTempLimits;
   BreachType processedBreachType;
   batteryTempLimits = classifyTemp(coolingType);
-  processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
-  alertBreach(alertTarget , processedBreachType);
+  if(batteryTempLimits.status == SUCCESS)
+  {
+    processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
+    alertBreach(alertTarget , processedBreachType);
+  }
 }
