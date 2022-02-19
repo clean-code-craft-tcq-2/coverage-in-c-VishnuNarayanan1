@@ -23,7 +23,8 @@ typedef enum {
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL,
-  MAX_ALERT_TARGET_POSSIBILITIES
+  MAX_ALERT_TARGET_POSSIBILITIES,
+  INVALID_ALERT_TARGET = 0xff
 } AlertTarget;
 
 typedef enum{
