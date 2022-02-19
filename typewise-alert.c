@@ -35,37 +35,16 @@ BatteryParam_st classifyTemp(CoolingType coolingType)
   return batteryParameters;
 }
 
-BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) 
-{
-  int lowerLimit = 0;
-  int upperLimit = 0;
-  switch(coolingType) {
-    case PASSIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 35;
-      break;
-    case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
-      break;
-    case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 40;
-      break;
-  }
-  return inferBreach(temperatureInC, lowerLimit, upperLimit);
-}
 
-void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
+void alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
-  BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC);
   switch(alertTarget) 
   {
     case TO_CONTROLLER:
-      sendToController(breachType);
+      sendToController(processedBreachType);
       break;
     case TO_EMAIL:
-      sendToEmail(breachType);
+      sendToEmail(processedBreachType);
       break;
   }
 }
@@ -99,4 +78,5 @@ void test(AlertTarget alertTarget, CoolingType coolingType, double temperatureIn
   BreachType processedBreachType;
   batteryTempLimits = classifyTemp(coolingType);
   processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
+  alertBreach(alertTarget , processedBreachType);
 }
