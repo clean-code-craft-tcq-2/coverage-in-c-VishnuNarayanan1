@@ -33,6 +33,7 @@ typedef struct {
   CoolingType coolingType;
   double lowerLimitTemp;
   double higherLimitTemp;
+  bool status;
 } BatteryParam_st;
 
 typedef void (*FnPtrAlertTarget)(BreachType);
