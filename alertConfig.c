@@ -31,7 +31,7 @@ AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES] =
     .alertTargetFunction = &sendAlertToController
   },
   {
-     .alertTarget = TO_EMAIL
+     .alertTarget = TO_EMAIL,
     .alertTargetFunction = &sendAlertToEmail
   }
 };
