@@ -55,5 +55,7 @@ MailNotification_st MailNotificationInfo[MAX_BREACH_TYPES] =
 char AlertMessageOverEmail[MAX_BREACH_TYPES][100] =
 {"Not Applicable","Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
 
+#ifdef PRODUCTION_ENVIRONMENT
 FnPtrPrintToController FuncPointerPrintToController = &PrintToController ;
 FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmail ;
+#endif
