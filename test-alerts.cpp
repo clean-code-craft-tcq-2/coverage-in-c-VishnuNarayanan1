@@ -212,11 +212,106 @@ TEST_CASE("SendAlertToEmail - With Mail Notification Not Required - In case of b
   REQUIRE(Test_PrintToEmailStubCount  == 4);  
 }
 
-TEST_CASE("ValidateBattery -Positive Scenario- ") {
+TEST_CASE("ValidateBattery -Positive Scenario- TO_CONTROLLER , PASSIVE_COOLING with various temperature values ") {
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,PASSIVE_COOLING,25);
   REQUIRE(ValidateBatteryStatus  == SUCCESS); 
   REQUIRE(Test_PrintToControllerStubCount  == 7); 
-  REQUIRE(Test_PrintToEmailStubCount  == 4);  
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,PASSIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 8); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,PASSIVE_COOLING,45);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 9); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
 }
+
+TEST_CASE("ValidateBattery -Positive Scenario- TO_CONTROLLER , HI_ACTIVE_COOLING with various temperature values ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,HI_ACTIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 10); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,HI_ACTIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 11); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,HI_ACTIVE_COOLING,50);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+}
+
+TEST_CASE("ValidateBattery -Positive Scenario- TO_CONTROLLER , MED_ACTIVE_COOLING with various temperature values ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 10); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 11); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_CONTROLLER,MED_ACTIVE_COOLING,45);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+}
+
+//NOTE : Since for NORMAL scenario Email notification is configured as not required, Test_PrintToEmailStubCount is expected to remain 0 though
+// ValidateBatteryStatus is SUCCESS
+TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , PASSIVE_COOLING with various temperature values ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 4); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 5); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,PASSIVE_COOLING,45);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 6); 
+}
+
+//NOTE : Since for NORMAL scenario Email notification is configured as not required, Test_PrintToEmailStubCount is expected to remain 0 though
+// ValidateBatteryStatus is SUCCESS
+TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , HI_ACTIVE_COOLING with various temperature values ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 6); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 7); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,HI_ACTIVE_COOLING,50);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 8); 
+}
+
+//NOTE : Since for NORMAL scenario Email notification is configured as not required, Test_PrintToEmailStubCount is expected to remain 0 though
+// ValidateBatteryStatus is SUCCESS
+TEST_CASE("ValidateBattery -Positive Scenario- TO_EMAIL , MED_ACTIVE_COOLING with various temperature values ") {
+  bool ValidateBatteryStatus;
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,25);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 8); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,-10);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 9); 
+  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,MED_ACTIVE_COOLING,45);
+  REQUIRE(ValidateBatteryStatus  == SUCCESS); 
+  REQUIRE(Test_PrintToControllerStubCount  == 12); 
+  REQUIRE(Test_PrintToEmailStubCount  == 10); 
+}
+
 
