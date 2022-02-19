@@ -33,7 +33,7 @@ AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES] =
 };
 
 
-MailNotification_st MailNotification[MAX_BREACH_TYPES] =
+MailNotification_st MailNotificationInfo[MAX_BREACH_TYPES] =
 {
   {
     .breachType  = NORMAL,
