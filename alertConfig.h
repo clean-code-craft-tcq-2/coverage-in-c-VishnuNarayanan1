@@ -1,6 +1,8 @@
 #define MAX_COOLING_TYPES   3
 #define MAX_BREACH_TYPES    3
 #define INVALID_TEMPERATURE 0xff
+#define SUCCESS true
+#define FAILURE false
 
 typedef enum {
   PASSIVE_COOLING,
@@ -20,20 +22,22 @@ typedef enum {
   TO_EMAIL
 } AlertTarget;
 
-typedef enum {
-  Required,
-  NotRequired
-} MailNotification;
-
 typedef struct {
   CoolingType coolingType;
   double lowerLimitTemp;
   double higherLimitTemp;
 } BatteryParam_st;
 
+typedef ValueLimits (*FnPtrReadBatteryParam)(void);
+
+struct InputValues_st
+{
+  FnPtrReadBatteryParam readInputValues;
+};
+
 typedef struct {
-  BreachType breachType;
-  MailNotification mailNotification;
+  AlertTarget alertTarget;
+  
 } BreachMailNotification_st;
   
 
