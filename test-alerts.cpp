@@ -20,7 +20,7 @@ FnPtrPrintToController FuncPointerPrintToController = &PrintToControllerStub;
 FnPtrPrintToEmail FuncPointerPrintToEmail = &PrintToEmailStub;
 #endif 
 
-TEST_CASE("Temperature value passed is less than lower limit") {
+TEST_CASE("InferBreach -Temperature value passed is less than lower limit") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
@@ -29,7 +29,7 @@ TEST_CASE("Temperature value passed is less than lower limit") {
 }
 
 
-TEST_CASE("Temperature value passed is more than higher limit") {
+TEST_CASE("InferBreach - Temperature value passed is more than higher limit") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
@@ -38,7 +38,7 @@ TEST_CASE("Temperature value passed is more than higher limit") {
 }
 
 
-TEST_CASE("Temperature value passed is in the normal range") {
+TEST_CASE("InferBreach - Temperature value passed is in the normal range") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
@@ -46,7 +46,7 @@ TEST_CASE("Temperature value passed is in the normal range") {
   REQUIRE(InferBreach(value, BatteryLimits) == NORMAL);
 }
 
-TEST_CASE("Temperature value passed is in the lower boundary") {
+TEST_CASE("InferBreach - Temperature value passed is in the lower boundary") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
@@ -54,7 +54,7 @@ TEST_CASE("Temperature value passed is in the lower boundary") {
   REQUIRE(InferBreach(value, BatteryLimits) == NORMAL);
 }
 
-TEST_CASE("Temperature value passed is in the higher boundary") {
+TEST_CASE("InferBreach -Temperature value passed is in the higher boundary") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
@@ -63,7 +63,7 @@ TEST_CASE("Temperature value passed is in the higher boundary") {
 }
 
 
-TEST_CASE("PASSIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+TEST_CASE("ClassifyTemp -Positive scenario- PASSIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
   BatteryParam_st BatteryLimits;
   BatteryLimits = ClassifyTemp(PASSIVE_COOLING);
   REQUIRE(BatteryLimits.status  == SUCCESS);
@@ -72,7 +72,7 @@ TEST_CASE("PASSIVE_COOLING Cooling Type based lower and upper temperature limit 
   REQUIRE(BatteryLimits.higherLimitTemp == 35);
 }
 
-TEST_CASE("HI_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+TEST_CASE("ClassifyTemp -Positive scenario- HI_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
   BatteryParam_st BatteryLimits;
   BatteryLimits = ClassifyTemp(HI_ACTIVE_COOLING);
   REQUIRE(BatteryLimits.status  == SUCCESS);
@@ -81,7 +81,7 @@ TEST_CASE("HI_ACTIVE_COOLING Cooling Type based lower and upper temperature limi
   REQUIRE(BatteryLimits.higherLimitTemp == 45);
 }
 
-TEST_CASE("MED_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
+TEST_CASE("ClassifyTemp -Positive scenario- MED_ACTIVE_COOLING Cooling Type based lower and upper temperature limit derivation ") {
   BatteryParam_st BatteryLimits;
   BatteryLimits = ClassifyTemp(MED_ACTIVE_COOLING);
   REQUIRE(BatteryLimits.status  == SUCCESS);
@@ -90,8 +90,32 @@ TEST_CASE("MED_ACTIVE_COOLING Cooling Type based lower and upper temperature lim
   REQUIRE(BatteryLimits.higherLimitTemp == 40);
 }
 
-TEST_CASE("INVALID_COOLING_TYPE  Test cooling type which is not under the configured list ") {
+TEST_CASE("ClassifyTemp -Negative scenario- INVALID_COOLING_TYPE  Test cooling type which is not under the configured list ") {
   BatteryParam_st BatteryLimits;
   BatteryLimits = ClassifyTemp(INVALID_COOLING_TYPE);
   REQUIRE(BatteryLimits.status  == FAILURE);
+}
+
+TEST_CASE("ValidateRange -Positive scenario-  On passing 2 input values with (var1 >= 0 && var1 < var2) ") {
+  bool ValidateRangeStatus;
+  ValidateRangeStatus = ValidateRange (5,10);
+  REQUIRE(ValidateRangeStatus  == true);
+}
+
+TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 >= 0 && var1 > var2) ") {
+  bool ValidateRangeStatus;
+  ValidateRangeStatus = ValidateRange (15,10);
+  REQUIRE(ValidateRangeStatus  == fail);
+}
+
+TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 < 0 && var1 < var2) ") {
+  bool ValidateRangeStatus;
+  ValidateRangeStatus = ValidateRange (-1,10);
+  REQUIRE(ValidateRangeStatus  == fail);
+}
+
+TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var1 < 0 && var1 > var2) ") {
+  bool ValidateRangeStatus;
+  ValidateRangeStatus = ValidateRange (-1,-5);
+  REQUIRE(ValidateRangeStatus  == fail);
 }
