@@ -28,4 +28,4 @@ typedef struct {
   double higherLimitTemp;
 } BatteryParam;
 
-extern struct BatteryParam BatteryParamValues[MAX_COOLING_TYPES];
+extern struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
