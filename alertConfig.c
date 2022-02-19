@@ -20,5 +20,20 @@ struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
   }
 };
 
-char AlertMessageOverEmail[MAX_COOLING_TYPES][100] =
-{"Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
+struct BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES]=
+{
+  {
+    .breachType    = NORMAL,
+    .mailNotification = NotRequired
+  },
+  {
+    .breachType    = TOO_LOW,
+    .mailNotification = Required
+  },
+  {
+    .breachType    = TOO_HIGH,
+    .mailNotification = Required
+  }
+};
+char AlertMessageOverEmail[MAX_BREACH_TYPES][100] =
+{"Not Applicable","Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
