@@ -1,7 +1,7 @@
 #pragma once
 
 BreachType inferBreach(double value, BatteryParam_st batteryLimits);
-void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
+void alertBreach(AlertTarget alertTarget, BreachType processedBreachType);
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
 BatteryParam_st classifyTemp(CoolingType coolingType);
