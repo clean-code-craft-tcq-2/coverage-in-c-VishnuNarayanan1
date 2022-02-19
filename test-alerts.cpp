@@ -126,5 +126,52 @@ TEST_CASE("AlertBreach -Positive scenario- Alert message to controller with brea
   bool AlertBreachStatus;
   AlertBreachStatus = AlertBreach (TO_CONTROLLER,NORMAL);
   REQUIRE(AlertBreachStatus  == SUCCESS);
-  REQUIRE(Test_PrintToControllerStubCount  == 1);  
+  REQUIRE(Test_PrintToControllerStubCount  == 1);
+  REQUIRE(Test_PrintToEmailStubCount  == 0);   
+}
+
+
+TEST_CASE("AlertBreach -Positive scenario- Alert message to controller with breach level TOO_LOW ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_CONTROLLER,TOO_LOW);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 2); 
+  REQUIRE(Test_PrintToEmailStubCount  == 0);  
+}
+
+
+TEST_CASE("AlertBreach -Positive scenario- Alert message to controller with breach level TOO_HIGH ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_CONTROLLER,TOO_HIGH);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 3);  
+  REQUIRE(Test_PrintToEmailStubCount  == 0);  
+}
+
+//NOTE : Since for NORMAL scenario Email notification is configured as not required, Test_PrintToEmailStubCount is expected to remain 0 though
+// AlertBreachStatus is SUCCESS
+TEST_CASE("AlertBreach -Positive scenario- Alert message through Email with breach level NORMAL ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_EMAIL,NORMAL);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 3); 
+  REQUIRE(Test_PrintToEmailStubCount  == 0);  
+}
+
+
+TEST_CASE("AlertBreach -Positive scenario- Alert message through Email with breach level TOO_LOW ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_EMAIL,TOO_LOW);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 3); 
+  REQUIRE(Test_PrintToEmailStubCount  == 1);  
+}
+
+
+TEST_CASE("AlertBreach -Positive scenario- Alert message through Email with breach level TOO_HIGH ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_EMAIL,TOO_HIGH);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 3); 
+  REQUIRE(Test_PrintToEmailStubCount  == 2);  
 }
