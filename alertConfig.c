@@ -28,11 +28,11 @@ AlertTarget_st AlertTargetInfo[MAX_ALERT_TARGET_POSSIBILITIES] =
 {
   {
     .alertTarget = TO_CONTROLLER,
-    .alertTargetFunction = &sendAlertToController
+    .alertTargetFunction = &SendAlertToController
   },
   {
      .alertTarget = TO_EMAIL,
-    .alertTargetFunction = &sendAlertToEmail
+    .alertTargetFunction = &SendAlertToEmail
   }
 };
 
