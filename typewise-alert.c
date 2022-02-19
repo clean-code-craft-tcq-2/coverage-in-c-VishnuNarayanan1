@@ -19,7 +19,6 @@ BreachType inferBreach(double value, BatteryParam_st batteryLimits)
 
 BatteryParam_st classifyTemp(CoolingType coolingType)
 {
-  int i = 0;
   BatteryParam_st batteryParameters; 
   batteryParameters.status = validateRange(coolingType,MAX_COOLING_TYPES);
   batteryParameters.coolingType = coolingType;
@@ -51,7 +50,7 @@ void alertBreach(AlertTarget alertTarget, BreachType processedBreachType)
       break;
   }
 }
-/*
+
 void PrintToController (header, breachType)
 {
       printf("%x : %x\n", header, breachType);
@@ -61,18 +60,20 @@ void PrintToEmail (recepient, message)
 {
       printf(""To: %s\n%s", recepient,message);
 }
-*/
-void sendToController(BreachType breachType) 
+
+void sendAlertToController(BreachType breachType) 
 {
   const unsigned short header = 0xfeed;
-  printf("%x : %x\n", header, breachType);
+  PrintToController(header,breachType);
 }
 
-void sendToEmail(BreachType breachType) 
+void sendAlertToEmail(BreachType breachType) 
 {
   const char* recepient = "a.b@c.com";
-      printf("To: %s\n", recepient);
-      printf("Hi, the temperature is too low\n");
+  if(MailNotification[breachType].mailNotification == REQUIRED)
+  {
+    PrintToEmail(recepient,AlertMessageOverEmail[breachType]);
+  }
 }
 
 
