@@ -37,6 +37,6 @@ typedef struct {
 } BreachMailNotification_st;
   
 
-extern struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
-extern struct BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES];
+extern BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
+extern BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES];
 extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
