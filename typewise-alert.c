@@ -47,7 +47,7 @@ bool ValidateRange(size_t Var1, size_t Var2)
 // Here the value of the alertTarget is checked to ensure that it is within the possible limits configured in alertConfig files.
 bool AlertBreach(AlertTarget AlertTargetIndex, BreachType processedBreachType) 
 {
-  if(ValidateRange(AlertTargetInfo,MAX_ALERT_TARGET_POSSIBILITIES))
+  if(ValidateRange(AlertTargetIndex,MAX_ALERT_TARGET_POSSIBILITIES))
   {
      // Refer to alertConfig files for the configured function pointer.
     AlertTargetInfo[AlertTargetIndex].alertTargetFunction(processedBreachType);
