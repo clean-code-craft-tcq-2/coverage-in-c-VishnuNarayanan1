@@ -70,7 +70,7 @@ void sendAlertToController(BreachType breachType)
 void sendAlertToEmail(BreachType breachType) 
 {
   const char* recepient = "a.b@c.com";
-  if(MailNotification[breachType].mailNotification == REQUIRED)
+  if(MailNotificationInfo[breachType].mailNotification == REQUIRED)
   {
     PrintToEmail(recepient,AlertMessageOverEmail[breachType]);
   }
