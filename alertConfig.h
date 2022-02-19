@@ -1,3 +1,4 @@
+#include <stddef.h>
 #define MAX_COOLING_TYPES   3
 #define MAX_BREACH_TYPES    3
 #define INVALID_TEMPERATURE 0xff
