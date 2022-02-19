@@ -38,7 +38,7 @@ TEST_CASE("Temperature value passed is more than higher limit") {
 }
 
 
-TEST_CASE("Temperature value passed is less than lower limit") {
+TEST_CASE("Temperature value passed is in the normal range") {
   BatteryParam_st BatteryLimits;
   BatteryLimits.lowerLimitTemp = 20;
   BatteryLimits.higherLimitTemp = 50;
