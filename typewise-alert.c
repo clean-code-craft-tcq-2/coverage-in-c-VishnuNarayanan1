@@ -40,7 +40,6 @@ bool validateRange(size_t var1, size_t var2)
 
 void alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
-  fnptr();
   
   switch(alertTarget) 
   {
@@ -52,7 +51,7 @@ void alertBreach(AlertTarget alertTarget, BreachType processedBreachType)
       break;
   }
 }
-
+/*
 void PrintToController (header, breachType)
 {
       printf("%x : %x\n", header, breachType);
@@ -62,7 +61,7 @@ void PrintToEmail (recepient, message)
 {
       printf(""To: %s\n%s", recepient,message);
 }
-
+*/
 void sendToController(BreachType breachType) 
 {
   const unsigned short header = 0xfeed;
@@ -72,12 +71,8 @@ void sendToController(BreachType breachType)
 void sendToEmail(BreachType breachType) 
 {
   const char* recepient = "a.b@c.com";
-  int i = 0;
-  if(BreachMailNotification[breachType].mailNotification == Required)
-  {
       printf("To: %s\n", recepient);
       printf("Hi, the temperature is too low\n");
-  }
 }
 
 
