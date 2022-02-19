@@ -1,3 +1,4 @@
+#define MAX_COOLING_TYPES   3
 
 typedef enum {
   PASSIVE_COOLING,
@@ -26,3 +27,5 @@ typedef struct {
   double lowerLimitTemp;
   double higherLimitTemp;
 } BatteryParam;
+
+extern struct BatteryParam BatteryParamValues[MAX_COOLING_TYPES];
