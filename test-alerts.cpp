@@ -120,3 +120,11 @@ TEST_CASE("ValidateRange -Negative scenario- On passing 2 input values with (var
   ValidateRangeStatus = ValidateRange (-1,-5);
   REQUIRE(ValidateRangeStatus  == false);
 }
+
+
+TEST_CASE("AlertBreach -Positive scenario- Alert message to controller with breach level NORMAL ") {
+  bool AlertBreachStatus;
+  AlertBreachStatus = AlertBreach (TO_CONTROLLER,NORMAL);
+  REQUIRE(AlertBreachStatus  == SUCCESS);
+  REQUIRE(Test_PrintToControllerStubCount  == 1);  
+}
