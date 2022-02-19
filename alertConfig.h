@@ -1,4 +1,5 @@
 #define MAX_COOLING_TYPES   3
+#define MAX_BREACH_TYPES    3
 #define INVALID_TEMPERATURE 0xff
 
 typedef enum {
@@ -11,7 +12,7 @@ typedef enum {
 typedef enum {
   NORMAL,
   TOO_LOW,
-  TOO_HIGH
+  TOO_HIGH,
 } BreachType;
 
 typedef enum {
@@ -19,15 +20,23 @@ typedef enum {
   TO_EMAIL
 } AlertTarget;
 
-typedef struct {
-  CoolingType coolingType;
-  char brand[48];
-} BatteryCharacter;
+typedef enum {
+  Required,
+  NotRequired
+} MailNotification;
 
 typedef struct {
   CoolingType coolingType;
   double lowerLimitTemp;
   double higherLimitTemp;
-} BatteryParam;
+} BatteryParam_st;
+
+typedef {
+  BreachType breachType;
+  MailNotification mailNotification;
+} BreachMailNotification_st;
+  
 
 extern struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES];
+extern struct BreachMailNotification_st BreachMailNotification[MAX_BREACH_TYPES];
+extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
