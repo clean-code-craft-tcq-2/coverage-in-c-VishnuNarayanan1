@@ -85,13 +85,16 @@ bool ValidateBattery(AlertTarget AlertTargetInfo, CoolingType CoolingTypeInfo, d
 {
   BatteryParam_st batteryTempLimits;
   BreachType processedBreachType;
-  bool status = FAILURE;
+  bool status;
   batteryTempLimits = ClassifyTemp(CoolingTypeInfo);
   if(batteryTempLimits.status == SUCCESS)
   {
     processedBreachType = InferBreach(TemperatureInC,batteryTempLimits);
     status = AlertBreach(AlertTargetInfo , processedBreachType);
   }
-  printf("\n Status %d\n",status);
+  else
+  {
+    status = FAILURE;
+  }
   return status;
 }
