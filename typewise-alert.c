@@ -29,7 +29,7 @@ BreachType InferBreach(double Value, BatteryParam_st BatteryLimits)
 BatteryParam_st ClassifyTemp(CoolingType CoolingTypeInfo)
 {
   BatteryParam_st batteryParameters; 
-  batteryParameters.status = validateRange(CoolingTypeInfo,MAX_COOLING_TYPES);
+  batteryParameters.status = ValidateRange(CoolingTypeInfo,MAX_COOLING_TYPES);
   batteryParameters.coolingType = CoolingTypeInfo;
   batteryParameters.lowerLimitTemp = BatteryParamValues[coolingType].lowerLimitTemp;
   batteryParameters.higherLimitTemp = BatteryParamValues[coolingType].higherLimitTemp;
@@ -47,7 +47,7 @@ bool ValidateRange(size_t Var1, size_t Var2)
 // Here the value of the alertTarget is checked to ensure that it is within the possible limits configured in alertConfig files.
 bool AlertBreach(AlertTarget AlertTargetInfo, BreachType processedBreachType) 
 {
-  if(validateRange(AlertTargetInfo,MAX_ALERT_TARGET_POSSIBILITIES))
+  if(ValidateRange(AlertTargetInfo,MAX_ALERT_TARGET_POSSIBILITIES))
   {
      // Refer to alertConfig files for the configured function pointer.
     AlertTargetInfo[AlertTargetInfo].alertTargetFunction(processedBreachType);
