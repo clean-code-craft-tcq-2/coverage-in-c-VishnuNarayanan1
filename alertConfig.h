@@ -1,9 +1,11 @@
 #define MAX_COOLING_TYPES   3
+#define INVALID_TEMPERATURE 0xff
 
 typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
-  MED_ACTIVE_COOLING
+  MED_ACTIVE_COOLING,
+  INVALID_COOLING_TYPE = 0xff
 } CoolingType;
 
 typedef enum {
