@@ -2,15 +2,19 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
-BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
-  if(value < lowerLimit) {
+BreachType inferBreach(double value, BatteryParam_st batteryLimits) 
+{
+  if(value < batteryLimits.lowerLimitTemp) 
+  {
     return TOO_LOW;
   }
-  if(value > upperLimit) {
+  if(value > batteryLimits.higherLimitTemp) 
+  {
     return TOO_HIGH;
   }
   return NORMAL;
 }
+
 
 BatteryParam_st classifyTemp(CoolingType coolingType)
 {
@@ -87,4 +91,12 @@ void sendToEmail(BreachType breachType)
     case NORMAL:
       break;
   }
+}
+
+void test(AlertTarget alertTarget, CoolingType coolingType, double temperatureInC)
+{
+  BatteryParam_st batteryTempLimits;
+  BreachType processedBreachType;
+  batteryTempLimits = classifyTemp(coolingType);
+  processedBreachType = inferBreach(temperatureInC,batteryTempLimits);
 }
