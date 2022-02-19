@@ -19,3 +19,6 @@ struct BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
   .higherLimitTemp = 40
   }
 };
+
+char AlertMessageOverEmail[MAX_COOLING_TYPES][100] =
+{"Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
