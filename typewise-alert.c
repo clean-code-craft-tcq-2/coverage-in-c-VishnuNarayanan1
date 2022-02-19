@@ -39,7 +39,7 @@ bool validateRange(size_t var1, size_t var2)
 
 bool alertBreach(AlertTarget alertTarget, BreachType processedBreachType) 
 {
-  if(validateRange(alertTarget,MAX_ALERT_TARGET_POSSIBILITIES)
+  if(validateRange(alertTarget,MAX_ALERT_TARGET_POSSIBILITIES))
   {
     AlertTargetInfo[alertTarget].alertTargetFunction(processedBreachType);
     return SUCCESS;
