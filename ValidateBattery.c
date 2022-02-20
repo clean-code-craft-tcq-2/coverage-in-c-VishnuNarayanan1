@@ -1,5 +1,5 @@
-#include "alertConfig.h"
-#include "typewise-alert.h"
+#include "Config.h"
+#include "ValidateBattery.h"
 #include <stdio.h>
 #include <stdbool.h>
 
