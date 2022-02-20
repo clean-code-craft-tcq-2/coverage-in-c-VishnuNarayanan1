@@ -2,8 +2,9 @@
 
 #include "test/catch.hpp"
 #include <stdbool.h>
-#include "alertConfig.h"
-#include "typewise-alert.h"
+#include "Config.h"
+#include "ValidateBattery.h"
+#include "SendAlertInfo.h"
 
 // Note : For the test environment stub for all the print interfaces used
 #ifdef TEST_ENVIRONMENT
