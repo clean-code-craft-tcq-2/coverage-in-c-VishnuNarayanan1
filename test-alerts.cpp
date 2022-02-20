@@ -175,7 +175,7 @@ TEST_CASE("AlertBreach -Positive scenario- Alert message through Email with brea
   REQUIRE(Test_PrintToControllerStubCount  == 3); 
   REQUIRE(Test_PrintToEmailStubCount  == 2);  
 }
-
+/*
 TEST_CASE("AlertBreach -Negative scenario- Alert message through invalid target with breach level NORMAL ") {
   bool AlertBreachStatus;
   AlertBreachStatus = AlertBreach (INVALID_ALERT_TARGET,NORMAL);
@@ -183,7 +183,7 @@ TEST_CASE("AlertBreach -Negative scenario- Alert message through invalid target 
   REQUIRE(Test_PrintToControllerStubCount  == 3); 
   REQUIRE(Test_PrintToEmailStubCount  == 2);  
 }
-
+*/
 
 TEST_CASE("SendAlertToController - With various possible breach types  ") {
   SendAlertToController (NORMAL);
