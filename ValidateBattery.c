@@ -41,9 +41,11 @@ bool ValidateBattery(AlertTarget AlertTargetInfo, CoolingType CoolingTypeInfo, d
   BreachType processedBreachType;
   bool status = FAILURE;
   batteryTempLimits = ClassifyTemp(CoolingTypeInfo);
+  // If invalid CoolingTypeInfo is passed, then ValidateBattery function would return FAILURE
   if(batteryTempLimits.status == SUCCESS)
   {
     processedBreachType = InferBreach(TemperatureInC,batteryTempLimits);
+     // If invalid Alert type is passed, then ValidateBattery function would return FAILURE
     status = AlertBreach(AlertTargetInfo , processedBreachType);
   }
   return status;
