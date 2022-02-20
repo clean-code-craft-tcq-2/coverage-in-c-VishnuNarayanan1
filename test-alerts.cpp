@@ -324,6 +324,7 @@ TEST_CASE("ValidateBattery -Negative Scenario- INVALID_COOLING_TYPE ") {
   REQUIRE(ValidateBatteryStatus  == FAILURE);
 }
 
+/*
 TEST_CASE("ValidateBattery -Negative Scenario- INVALID_ALERT_TARGET  ") {
   bool ValidateBatteryStatus;
   ValidateBatteryStatus = ValidateBattery (INVALID_ALERT_TARGET ,MED_ACTIVE_COOLING,25);
@@ -331,5 +332,5 @@ TEST_CASE("ValidateBattery -Negative Scenario- INVALID_ALERT_TARGET  ") {
   REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 10); 
 }
-
+*/
 
