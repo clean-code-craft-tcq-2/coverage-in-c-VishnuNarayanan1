@@ -323,8 +323,6 @@ TEST_CASE("ValidateBattery -Negative Scenario- INVALID_COOLING_TYPE ") {
   REQUIRE(ValidateBatteryStatus  == FAILURE); 
   REQUIRE(Test_PrintToControllerStubCount  == 15); 
   REQUIRE(Test_PrintToEmailStubCount  == 10); 
-  ValidateBatteryStatus = ValidateBattery (TO_EMAIL,COOLING_NEGATIVE,25);
-  REQUIRE(ValidateBatteryStatus  == FAILURE);
 }
 
 
