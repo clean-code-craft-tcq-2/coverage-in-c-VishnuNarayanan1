@@ -25,6 +25,8 @@ BatteryParam_st ClassifyTemp(CoolingType CoolingTypeInfo)
 }
 
 // Utility function to validate if the variable 1 is within the specified range.
+// NOTE : This is exclusively introduced to check the inputs of the battery that needs to be validated.
+// If the user passes information that are not part of configuration, then that needs to be discarded, for which this validation is required.
 bool ValidateRange(size_t Var1, size_t Var2)
 {
   if((Var1 >= 0) && (Var1 < Var2)) { return true;} 
