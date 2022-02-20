@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "alertConfig.h"
-#include "typewise-alert.h"
+#include "Config.h"
+#include "ValidateBattery.h"
+#include "SendAlertInfo.h"
 
 BatteryParam_st BatteryParamValues[MAX_COOLING_TYPES] =
 {
