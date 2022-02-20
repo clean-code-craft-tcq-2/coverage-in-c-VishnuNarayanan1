@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 //In case of production environment following print functionalities are used.
+// Refer test-alerts.cpp file for the stub functions used in the unit test environment
 #ifdef PRODUCTION_ENVIRONMENT
 void PrintToController (const unsigned short Header, BreachType BreachTypeInfo)
 {
@@ -24,6 +25,7 @@ bool AlertBreach(AlertTarget AlertTargetIndex, BreachType processedBreachType)
   if(ValidateRange(AlertTargetIndex,MAX_ALERT_TARGET_POSSIBILITIES))
   {
      // Refer to alertConfig files for the configured function pointer.
+     // Function pointer is used if in case more alerting mechanisms (other than controller / email) pops in, this can be configured.
     AlertTargetInfo[AlertTargetIndex].alertTargetFunction(processedBreachType);
     return SUCCESS;
   }
